@@ -1,3 +1,4 @@
+import Link from "next/link";
 const getTickets = async () => {
   const res = await fetch("http://localhost:4000/tickets", {
     next: {
@@ -17,9 +18,11 @@ const TicketList = async () => {
         const { id, title, body, priority, user_email } = ticket;
         return (
           <div key={id} className="card my-5">
-            <h3>{title}</h3>
-            <p>{body.slice(0, 200)}...</p>
-            <div className={`pill ${priority}`}>{priority} priority</div>
+            <Link href={`/tickets/${id}`}>
+              <h3>{title}</h3>
+              <p>{body.slice(0, 200)}...</p>
+              <div className={`pill ${priority}`}>{priority} priority</div>
+            </Link>
           </div>
         );
       })}
